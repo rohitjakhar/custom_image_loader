@@ -40,7 +40,8 @@ class AsyncImageLoader(
     val targetView: ImageView,
     val placeHolder: Drawable?,
     val error: Drawable?
-) {
+)
+{
     private val fileCache by lazy { MyApp.getImageFileCache() }
     private val job = CoroutineScope(Job())
 
@@ -85,24 +86,6 @@ class AsyncImageLoader(
     }
 }
 
-class MemoryCache {
-    private val cache = mutableMapOf<String, SoftReference<Bitmap>>()
-
-    operator fun get(id: String): Bitmap? {
-        if (!cache.containsKey(id)) return null
-        val ref = cache[id]!!
-        return ref.get()
-    }
-
-    fun put(id: String, bitmap: Bitmap) {
-        cache[id] = SoftReference(bitmap)
-    }
-
-    fun clear() {
-        cache.clear()
-    }
-}
-
 class FileCache(context: Context) {
     private val cacheDir = File(context.cacheDir, DISK_CACHE_SUBDIR)
     fun getBitmapFromDiskCache(imageUrl: String): Bitmap? {
@@ -115,7 +98,7 @@ class FileCache(context: Context) {
     }
 
     fun saveBitmapToDiskCache(imageUrl: String, bitmap: Bitmap) {
-        if (!cacheDir.exists()) {
+        if (cacheDir.exists().not()) {
             cacheDir.mkdirs()
         }
         val cacheFile = File(cacheDir, imageUrl.hashCode().toString())
