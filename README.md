@@ -19,3 +19,11 @@ Docs here:
  * @param placeHolder Drawable to be displayed while the image is being loaded. Defaults to null.
  */
 
+## Screenshots
+
+1. Loading:
+![Screenshot_Loading.png](media%2FScreenshot_Loading.png)
+
+
+2. Success:
+![Screenshot_Success.png](media%2FScreenshot_Success.png)
